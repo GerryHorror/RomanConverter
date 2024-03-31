@@ -1,3 +1,39 @@
+document.getElementById("number").addEventListener("input", function () {
+  const number = document.getElementById("number").value;
+  const outputText = validateAndConvert(number);
+  displayResult(outputText);
+});
+
+document.getElementById("convert-btn").addEventListener("click", function () {
+  const number = document.getElementById("number").value;
+  const outputText = validateAndConvert(number);
+  displayResult(outputText);
+});
+
+function displayResult(outputText) {
+  const resultContainer = document.getElementById("result-container");
+  const outputElement = document.getElementById("output");
+  const errorElement = document.getElementById("error");
+
+  if (outputText.startsWith("Please")) {
+      errorElement.textContent = outputText;
+      outputElement.innerText = '';
+  } else {
+      errorElement.textContent = '';
+      outputElement.innerText = outputText;
+  }
+
+  resultContainer.style.display = outputText ? "block" : "none";
+}
+
+function validateAndConvert(num) {
+  num = parseInt(num, 10);
+  if (isNaN(num)) return "Please enter a valid number";
+  if (num <= 0) return "Please enter a number greater than 0";
+  if (num > 3999) return "Number must be less than or equal to 3999";
+  return convertToRoman(num);
+}
+
 document.getElementById("convert-btn").addEventListener("click", function () {
   let number = document.getElementById("number").value;
   let outputText = validateAndConvert(number);
